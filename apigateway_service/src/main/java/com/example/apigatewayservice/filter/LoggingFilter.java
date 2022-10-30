@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class LoggingFilter extends AbstractGatewayFilterFactory<LoggingFilter.Config> {
 
-    public LoggingFilter(){
+    public LoggingFilter() {
         super(Config.class);
     }
 
@@ -37,6 +37,7 @@ public class LoggingFilter extends AbstractGatewayFilterFactory<LoggingFilter.Co
         }, Ordered.LOWEST_PRECEDENCE);
         return filter;
     }
+
     @Data
     public static class Config {
         private String baseMessage;

@@ -18,17 +18,18 @@ public class FirstServiceController {
     private final Environment env;
 
     @GetMapping("/welcome")
-    public String welcome(){
+    public String welcome() {
         return "welcome first-service";
     }
+
     @GetMapping("/message")
-    public String message(@RequestHeader("first-request")String header){
+    public String message(@RequestHeader("first-request") String header) {
         log.info(header);
         return "Hello World in First Service";
     }
 
     @GetMapping("/check")
-    public String check(HttpServerRequest request){
+    public String check(HttpServerRequest request) {
         log.info("Server port = {}", request.hostAddress().getPort());
         return String.format("Hi, there. This is a message from First Service on PORT %s"
                 , env.getProperty("local.server.port"));
