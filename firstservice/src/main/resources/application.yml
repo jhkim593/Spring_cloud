@@ -2,10 +2,10 @@ server:
   port: 0
 
 spring:
-  main:
-    web-application-type: reactive
+#  main:
+#    web-application-type: reactive
   application:
-    name: my-first-service
+    name: first-service
 
 eureka:
   client:

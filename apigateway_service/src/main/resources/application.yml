@@ -27,6 +27,18 @@ spring:
             preLogger: true
             postLogger: true
       routes:
+        - id: first-service
+          uri: lb://FIRST-SERVICE
+          predicates:
+            - Path=/first-service/**
+          filters:
+            - RewritePath=/first-service/(?<segment>.*), /$\{segment}
+            - name: LoggingFilter
+              args:
+                baseMessage: Hi
+                preLogger: true
+                postLogger: true
+
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
@@ -81,4 +93,18 @@ spring:
           uri: lb://ORDER-SERVICE
           predicates:
             - Path=/order-service/**
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/actuator/**
+            - Method=GET,POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health , beans , refresh
 
